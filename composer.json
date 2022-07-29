@@ -1,0 +1,19 @@
+{
+    "name": "vion/test-case",
+    "description": "Test Case - a simple class for main feature tests",
+    "type": "project",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Vion\\TestCase\\": "packages/vion/testcase/src"
+        }
+    },
+    "authors": [
+        {
+            "name": "Daniil Sherkozhukhov",
+            "email": "d.a.sherkozhukhov1995@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}
