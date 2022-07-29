@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit17e9e5e49b182be2d8226978de0e874e
+class ComposerStaticInitc27b7a8f58bbbb514638993b7ac1284d
 {
     public static $prefixLengthsPsr4 = array (
         'V' => 
@@ -16,7 +16,7 @@ class ComposerStaticInit17e9e5e49b182be2d8226978de0e874e
     public static $prefixDirsPsr4 = array (
         'Vion\\TestCase\\' => 
         array (
-            0 => __DIR__ . '/../..' . '/packages/vion/testcase/src',
+            0 => __DIR__ . '/../..' . '/src',
         ),
     );
 
@@ -27,9 +27,9 @@ class ComposerStaticInit17e9e5e49b182be2d8226978de0e874e
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit17e9e5e49b182be2d8226978de0e874e::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit17e9e5e49b182be2d8226978de0e874e::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInit17e9e5e49b182be2d8226978de0e874e::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInitc27b7a8f58bbbb514638993b7ac1284d::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInitc27b7a8f58bbbb514638993b7ac1284d::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInitc27b7a8f58bbbb514638993b7ac1284d::$classMap;
 
         }, null, ClassLoader::class);
     }

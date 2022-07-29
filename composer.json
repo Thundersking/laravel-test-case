@@ -1,19 +1,26 @@
 {
     "name": "vion/test-case",
-    "description": "Test Case - a simple class for main feature tests",
-    "type": "project",
+    "description": "TestCase for laravel",
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "Vion\\TestCase\\": "packages/vion/testcase/src"
+            "Vion\\TestCase\\": "src"
         }
     },
     "authors": [
         {
-            "name": "Daniil Sherkozhukhov",
+            "name": "Thundersking",
             "email": "d.a.sherkozhukhov1995@gmail.com"
         }
     ],
-    "minimum-stability": "dev",
-    "require": {}
+    "require": {
+        "php": "^7.4|^8.0"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Vion\\TestCase\\Providers\\TestServiceProvider"
+            ]
+        }
+    }
 }
