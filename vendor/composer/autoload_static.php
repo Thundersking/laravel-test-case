@@ -16,7 +16,7 @@ class ComposerStaticInit17e9e5e49b182be2d8226978de0e874e
     public static $prefixDirsPsr4 = array (
         'Vion\\TestCase\\' => 
         array (
-            0 => __DIR__ . '/../..' . '/src',
+            0 => __DIR__ . '/../..' . '/packages/vion/testcase/src',
         ),
     );
 

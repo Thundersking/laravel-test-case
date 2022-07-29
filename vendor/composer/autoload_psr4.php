@@ -6,5 +6,5 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'Vion\\TestCase\\' => array($baseDir . '/src'),
+    'Vion\\TestCase\\' => array($baseDir . '/packages/vion/testcase/src'),
 );
