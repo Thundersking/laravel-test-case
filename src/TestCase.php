@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests;
+namespace Vion\TestCase;
 
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 use Vion\TestCase\Actions\LogAction;
