@@ -7,4 +7,5 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Vion\\TestCase\\' => array($baseDir . '/src'),
+    'Codedungeon\\PHPCliColors\\' => array($vendorDir . '/codedungeon/php-cli-colors/src'),
 );

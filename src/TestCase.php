@@ -4,13 +4,12 @@ namespace Vion\TestCase;
 
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 use Vion\TestCase\Actions\LogAction;
-use Vion\TestCase\Applications\CreatesApplication;
 use Vion\TestCase\Console\Cli;
 use Vion\TestCase\Traits\HttpTrait;
 
 abstract class TestCase extends BaseTestCase
 {
-    use CreatesApplication, Cli, HttpTrait;
+    use Cli, HttpTrait;
 
     /**
      * Module test

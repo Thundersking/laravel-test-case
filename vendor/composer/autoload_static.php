@@ -11,12 +11,20 @@ class ComposerStaticInitc27b7a8f58bbbb514638993b7ac1284d
         array (
             'Vion\\TestCase\\' => 14,
         ),
+        'C' => 
+        array (
+            'Codedungeon\\PHPCliColors\\' => 25,
+        ),
     );
 
     public static $prefixDirsPsr4 = array (
         'Vion\\TestCase\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src',
+        ),
+        'Codedungeon\\PHPCliColors\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/codedungeon/php-cli-colors/src',
         ),
     );
 
