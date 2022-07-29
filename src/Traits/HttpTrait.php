@@ -76,9 +76,12 @@ trait HttpTrait
     private function getToken(): ?string
     {
         if (!self::$_token) {
-            $oauthClientId = 3;
-            $oauthClient = DB::table('oauth_clients')->findOrFail($oauthClientId);
+            $oauthClientId = env('VION_OAUTH_CLIENT_ID') ? env('VION_OAUTH_CLIENT_ID') : 3;
+            $oauthClient = DB::table('oauth_clients')->find($oauthClientId);
 
+            if (is_null($oauthClient)) {
+                return abort(404);
+            }
 
             if ($oauthClient) {
                 $body = [

@@ -14,8 +14,12 @@ class OauthTokenAction
     public function handle(): ?string
     {
         $oauthClientId = env('VION_OAUTH_CLIENT_ID') ? env('VION_OAUTH_CLIENT_ID') : 3;
-        $oauthClient = DB::table('oauth_clients')->findOrFail($oauthClientId);
+        $oauthClient = DB::table('oauth_clients')->find($oauthClientId);
 
+        if (is_null($oauthClient)) {
+            return abort(404);
+        }
+        
         if ($oauthClient) {
             $body = [
                 'username' => env('VION_USERNAME_TEST') ? env('VION_USERNAME_TEST') : 'admin@admin.ru',
