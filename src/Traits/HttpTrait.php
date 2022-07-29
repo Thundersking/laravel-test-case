@@ -2,7 +2,7 @@
 
 namespace Vion\TestCase\Traits;
 
-use App\Modules\Oauth\Models\OauthClient;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 
 trait HttpTrait
@@ -77,12 +77,13 @@ trait HttpTrait
     {
         if (!self::$_token) {
             $oauthClientId = 3;
-            $oauthClient = OauthClient::findOrFail($oauthClientId);
+            $oauthClient = DB::table('oauth_clients')->findOrFail($oauthClientId);
+
 
             if ($oauthClient) {
                 $body = [
-                    'username' => 'admin@karman24.ru',
-                    'password' => '814815a',
+                    'username' => env('VION_USERNAME_TEST') ? env('VION_USERNAME_TEST') : 'admin@admin.ru',
+                    'password' => env('VION_PASSWORD_TEST') ? env('VION_PASSWORD_TEST') : 'password',
                     'client_id' => $oauthClientId,
                     'client_secret' => $oauthClient->secret,
                     'grant_type' => 'password',
