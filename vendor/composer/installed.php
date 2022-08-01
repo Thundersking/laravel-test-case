@@ -3,7 +3,7 @@
         'name' => 'vion/test-case',
         'pretty_version' => 'dev-master',
         'version' => 'dev-master',
-        'reference' => 'b03a61bcc0def45c73a6a45a33083ea4dc846d43',
+        'reference' => '93cef087d394d3822652225bdcf050ba0e020d2d',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -22,7 +22,7 @@
         'vion/test-case' => array(
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
-            'reference' => 'b03a61bcc0def45c73a6a45a33083ea4dc846d43',
+            'reference' => '93cef087d394d3822652225bdcf050ba0e020d2d',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
