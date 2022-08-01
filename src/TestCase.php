@@ -18,6 +18,28 @@ abstract class TestCase extends BaseTestCase
     protected $module;
 
     /**
+     * Filename test
+     * @var string
+     */
+    private $filename;
+
+    /**
+     * @return void
+     */
+    public function __construct($name = null, array $data = [], $dataName = '')
+    {
+        parent::__construct($name, $data, $dataName);
+
+        $explodes = explode('/', $this->module);
+        
+        foreach ($explodes as $explode) {
+            $name .= ucfirst($explode);
+        }
+
+        $this->filename = $name;
+    }
+
+    /**
      * Test index method
      *
      * @return void
@@ -32,7 +54,7 @@ abstract class TestCase extends BaseTestCase
             $response->assertForbidden();
             $this->warning($this->module . '/index - 403');
         } else {
-            (new LogAction)->error(ucfirst($this->module) . '/IndexError.log', $response);
+            (new LogAction)->error($this->filename . '/IndexError.log', $response);
             $this->error($this->module . '/index - ' . $response->status());
         }
     }
@@ -53,7 +75,7 @@ abstract class TestCase extends BaseTestCase
             $response->assertForbidden();
             $this->warning($this->module . '/show - 403');
         }  else {
-            (new LogAction)->error(ucfirst($this->module) . '/ShowError.log', $response);
+            (new LogAction)->error($this->filename . '/ShowError.log', $response);
             $this->error($this->module . '/show - ' . $response->status());
         }
     }
@@ -76,8 +98,8 @@ abstract class TestCase extends BaseTestCase
             if ($response->status() === 201) {
                 $response->assertCreated();
                 $this->success($this->module . '/create - 201');
-            } elseif ($response->status() !== 422) {
-                (new LogAction)->error(ucfirst($this->module) . '/StoreError.log', $response);
+            } else {
+                (new LogAction)->error($this->filename . '/StoreError.log', $response);
                 $this->error($this->module . '/create - ' . $response->status());
             }
         } elseif ($response->status() === 403) {
@@ -107,7 +129,7 @@ abstract class TestCase extends BaseTestCase
                 $response->assertOk();
                 $this->success($this->module . '/update - 200');
             } else {
-                (new LogAction)->error(ucfirst($this->module) . '/UpdateError.log', $response);
+                (new LogAction)->error($this->filename . '/UpdateError.log', $response);
                 $this->error($this->module . '/update - ' . $response->status());
             }
         } elseif ($response->status() === 403) {
@@ -134,10 +156,10 @@ abstract class TestCase extends BaseTestCase
             $this->warning($this->module . '/delete - 403');
         } elseif ($response->status() === 422) {
             $response->assertUnprocessable();
-            (new LogAction)->error(ucfirst($this->module) . '/DestroyError.log', $response);
+            (new LogAction)->error($this->filename . '/DestroyError.log', $response);
             $this->warning($this->module . '/delete - ' . $response->status());
         } else {
-            (new LogAction)->error(ucfirst($this->module) . '/DestroyError.log', $response);
+            (new LogAction)->error($this->filename . '/DestroyError.log', $response);
             $this->error($this->module . '/delete - ' . $response->status());
         }
     }
@@ -157,7 +179,7 @@ abstract class TestCase extends BaseTestCase
             $response->assertForbidden();
             $this->warning($this->module . '/delete - 403');
         } else {
-            (new LogAction)->error(ucfirst($this->module) . '/AllListError.log', $response);
+            (new LogAction)->error($this->filename . '/AllListError.log', $response);
             $this->error($this->module . '/all-list - ' . $response->status());
         }
     }
@@ -181,7 +203,7 @@ abstract class TestCase extends BaseTestCase
             $response->assertForbidden();
             $this->warning($this->module . '/delete - 403');
         } else {
-            (new LogAction)->error(ucfirst($this->module) . '/Get' . ucfirst($method) . 'Error.log', $response);
+            (new LogAction)->error($this->filename . '/Get' . ucfirst($method) . 'Error.log', $response);
             $this->error($this->module . '/' . $method . ' - ' . $response->status());
         }
     }
@@ -207,14 +229,14 @@ abstract class TestCase extends BaseTestCase
                 $response->assertSuccessful();
                 $this->success($this->module . '/' . $method . ' - 200');
             } else {
-                (new LogAction)->error(ucfirst($this->module) . '/Post' . str_replace('-', '', ucfirst($method)) . 'Error.log', $response);
+                (new LogAction)->error($this->filename . '/Post' . str_replace('-', '', ucfirst($method)) . 'Error.log', $response);
                 $this->error($this->module . '/' . $method . ' - ' . $response->status());
             }
         } elseif ($response->status() === 403) {
             $response->assertForbidden();
             $this->warning($this->module . '/delete - 403');
         } else {
-            (new LogAction)->error(ucfirst($this->module) . '/Post' . str_replace('-', '', ucfirst($method)) . 'Error.log', $response);
+            (new LogAction)->error($this->filename . '/Post' . str_replace('-', '', ucfirst($method)) . 'Error.log', $response);
             $this->error($this->module . '/' . $method . ' - ' . $response->status());
         }
     }

@@ -85,8 +85,8 @@ trait HttpTrait
 
             if ($oauthClient) {
                 $body = [
-                    'username' => env('VION_USERNAME_TEST') ? env('VION_USERNAME_TEST') : 'admin@admin.ru',
-                    'password' => env('VION_PASSWORD_TEST') ? env('VION_PASSWORD_TEST') : 'password',
+                    'username' => env('VION_USERNAME_TEST', 'admin@admin.ru'),
+                    'password' => env('VION_PASSWORD_TEST', 'password'),
                     'client_id' => $oauthClientId,
                     'client_secret' => $oauthClient->secret,
                     'grant_type' => 'password',
