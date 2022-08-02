@@ -191,9 +191,9 @@ abstract class TestCase extends BaseTestCase
      * @param array $params
      * @return void
      */
-    protected function getTest(string $method, array $params = null)
+    protected function getTest(string $method, array $params = [])
     {
-        $response = $this->withToken()->get('/' . $this->module . '/' . $method . '/?' . http_build_query($params));
+        $response = $this->withToken()->get('/' . $this->module . '/' . $method . ($params ? '/?' . http_build_query($params) : ''));
 
         // добавил проверку 201, т.к. в некоторых get запросах присутствует post запрос
         if ($response->status() === 200 || $response->status() === 201) {
