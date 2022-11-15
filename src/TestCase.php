@@ -109,7 +109,13 @@ abstract class TestCase extends BaseTestCase
             $response->assertForbidden();
             $this->warning($this->module . '/create - 401');
             (new LogAction)->error($this->filename . 'StoreError.log', $response);
-        } 
+        } elseif ($response->status() === 201) {
+            $response->assertCreated();
+            $this->success($this->module . '/create - 201');
+        } else {
+            (new LogAction)->error($this->filename . 'StoreError.log', $response);
+            $this->error($this->module . '/create - ' . $response->status());
+        }
     }
 
     /**
@@ -257,6 +263,43 @@ abstract class TestCase extends BaseTestCase
             (new LogAction)->error($this->filename . 'Post' . str_replace('-', '', ucfirst($method)) . 'Error.log', $response);
         } else {
             (new LogAction)->error($this->filename . 'Post' . str_replace('-', '', ucfirst($method)) . 'Error.log', $response);
+            $this->error($this->module . '/' . $method . ' - ' . $response->status());
+        }
+    }
+
+    /**
+     * Test put method
+     *
+     * @param string $method
+     * @param array $data
+     * @return void
+     */
+    protected function putTest(string $method, array $data)
+    {
+        $response = $this->withToken()->put('/' . $this->module . '/' . $method);
+        
+        if ($response->status() === 422) {
+            $response->assertUnprocessable();
+            $this->info($this->module . '/' . $method . ' - 422');
+
+            $response = $this->withToken()->put('/' . $this->module . '/' . $method, $data);
+
+            if ($response->status() === 200 || $response->status() === 201) {
+                $response->assertSuccessful();
+                $this->success($this->module . '/' . $method . ' - 200');
+            } else {
+                (new LogAction)->error($this->filename . 'Put' . str_replace('-', '', ucfirst($method)) . 'Error.log', $response);
+                $this->error($this->module . '/' . $method . ' - ' . $response->status());
+            }
+        } elseif ($response->status() === 403) {
+            $response->assertForbidden();
+            $this->warning($this->module . '/delete - 403');
+        } elseif ($response->status() === 401) {
+            $response->assertForbidden();
+            $this->warning($this->module . '/putTest - 401');
+            (new LogAction)->error($this->filename . 'Put' . str_replace('-', '', ucfirst($method)) . 'Error.log', $response);
+        } else {
+            (new LogAction)->error($this->filename . 'Put' . str_replace('-', '', ucfirst($method)) . 'Error.log', $response);
             $this->error($this->module . '/' . $method . ' - ' . $response->status());
         }
     }
