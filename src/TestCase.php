@@ -105,6 +105,10 @@ abstract class TestCase extends BaseTestCase
         } elseif ($response->status() === 403) {
             $response->assertForbidden();
             $this->warning($this->module . '/create - 403');
+        } elseif ($response->status() === 401) {
+            $response->assertForbidden();
+            $this->warning($this->module . '/create - 401');
+            (new LogAction)->error($this->filename . 'StoreError.log', $response);
         } 
     }
 
@@ -135,6 +139,10 @@ abstract class TestCase extends BaseTestCase
         } elseif ($response->status() === 403) {
             $response->assertForbidden();
             $this->warning($this->module . '/update - 403');
+        } elseif ($response->status() === 401) {
+            $response->assertForbidden();
+            $this->warning($this->module . '/update - 401');
+            (new LogAction)->error($this->filename . 'UpdateError.log', $response);
         } 
     }
 
@@ -158,6 +166,10 @@ abstract class TestCase extends BaseTestCase
             $response->assertUnprocessable();
             (new LogAction)->error($this->filename . 'DestroyError.log', $response);
             $this->warning($this->module . '/delete - ' . $response->status());
+        } elseif ($response->status() === 401) {
+            $response->assertForbidden();
+            $this->warning($this->module . '/delete - 401');
+            (new LogAction)->error($this->filename . 'DestroyError.log', $response);
         } else {
             (new LogAction)->error($this->filename . 'DestroyError.log', $response);
             $this->error($this->module . '/delete - ' . $response->status());
@@ -202,6 +214,10 @@ abstract class TestCase extends BaseTestCase
         } elseif ($response->status() === 403) {
             $response->assertForbidden();
             $this->warning($this->module . '/delete - 403');
+        } elseif ($response->status() === 401) {
+            $response->assertForbidden();
+            $this->warning($this->module . '/getTest - 401');
+            (new LogAction)->error($this->filename . 'Get' . ucfirst($method) . 'Error.log', $response);
         } else {
             (new LogAction)->error($this->filename . 'Get' . ucfirst($method) . 'Error.log', $response);
             $this->error($this->module . '/' . $method . ' - ' . $response->status());
@@ -235,6 +251,10 @@ abstract class TestCase extends BaseTestCase
         } elseif ($response->status() === 403) {
             $response->assertForbidden();
             $this->warning($this->module . '/delete - 403');
+        } elseif ($response->status() === 401) {
+            $response->assertForbidden();
+            $this->warning($this->module . '/postTest - 401');
+            (new LogAction)->error($this->filename . 'Post' . str_replace('-', '', ucfirst($method)) . 'Error.log', $response);
         } else {
             (new LogAction)->error($this->filename . 'Post' . str_replace('-', '', ucfirst($method)) . 'Error.log', $response);
             $this->error($this->module . '/' . $method . ' - ' . $response->status());
