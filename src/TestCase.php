@@ -149,6 +149,9 @@ abstract class TestCase extends BaseTestCase
             $response->assertUnauthorized();
             $this->warning($this->module . '/update - 401');
             (new LogAction)->error($this->filename . 'UpdateError.log', $response);
+        } else if ($response->status() === 200) {
+            $response->assertOk();
+            $this->success($this->module . '/update - 200');
         } else {
             (new LogAction)->error($this->filename . 'UpdateError.log', $response);
             $this->error($this->module . '/update - ' . $response->status());
