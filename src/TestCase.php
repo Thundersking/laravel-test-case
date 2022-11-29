@@ -97,7 +97,7 @@ abstract class TestCase extends BaseTestCase
 
             if ($response->status() === 200 || $response->status() === 201) {
                 $response->assertOk();
-                $this->success($this->module . '/create - 201');
+                $this->success($this->module . '/create - ' . $response->status());
             } else {
                 (new LogAction)->error($this->filename . 'StoreError.log', $response);
                 $this->error($this->module . '/create - ' . $response->status());
