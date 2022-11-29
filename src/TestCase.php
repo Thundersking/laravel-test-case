@@ -106,7 +106,7 @@ abstract class TestCase extends BaseTestCase
             $response->assertForbidden();
             $this->warning($this->module . '/create - 403');
         } elseif ($response->status() === 401) {
-            $response->assertForbidden();
+            $response->assertUnauthorized();
             $this->warning($this->module . '/create - 401');
             (new LogAction)->error($this->filename . 'StoreError.log', $response);
         } elseif ($response->status() === 201) {
@@ -146,10 +146,13 @@ abstract class TestCase extends BaseTestCase
             $response->assertForbidden();
             $this->warning($this->module . '/update - 403');
         } elseif ($response->status() === 401) {
-            $response->assertForbidden();
+            $response->assertUnauthorized();
             $this->warning($this->module . '/update - 401');
             (new LogAction)->error($this->filename . 'UpdateError.log', $response);
-        } 
+        } else {
+            (new LogAction)->error($this->filename . 'UpdateError.log', $response);
+            $this->error($this->module . '/update - ' . $response->status());
+        }
     }
 
     /**
@@ -173,7 +176,7 @@ abstract class TestCase extends BaseTestCase
             (new LogAction)->error($this->filename . 'DestroyError.log', $response);
             $this->warning($this->module . '/delete - ' . $response->status());
         } elseif ($response->status() === 401) {
-            $response->assertForbidden();
+            $response->assertUnauthorized();
             $this->warning($this->module . '/delete - 401');
             (new LogAction)->error($this->filename . 'DestroyError.log', $response);
         } else {
@@ -221,7 +224,7 @@ abstract class TestCase extends BaseTestCase
             $response->assertForbidden();
             $this->warning($this->module . '/delete - 403');
         } elseif ($response->status() === 401) {
-            $response->assertForbidden();
+            $response->assertUnauthorized();
             $this->warning($this->module . '/getTest - 401');
             (new LogAction)->error($this->filename . 'Get' . ucfirst($method) . 'Error.log', $response);
         } else {
@@ -258,7 +261,7 @@ abstract class TestCase extends BaseTestCase
             $response->assertForbidden();
             $this->warning($this->module . '/delete - 403');
         } elseif ($response->status() === 401) {
-            $response->assertForbidden();
+            $response->assertUnauthorized();
             $this->warning($this->module . '/postTest - 401');
             (new LogAction)->error($this->filename . 'Post' . str_replace('-', '', ucfirst($method)) . 'Error.log', $response);
         } else {
@@ -295,7 +298,7 @@ abstract class TestCase extends BaseTestCase
             $response->assertForbidden();
             $this->warning($this->module . '/delete - 403');
         } elseif ($response->status() === 401) {
-            $response->assertForbidden();
+            $response->assertUnauthorized();
             $this->warning($this->module . '/putTest - 401');
             (new LogAction)->error($this->filename . 'Put' . str_replace('-', '', ucfirst($method)) . 'Error.log', $response);
         } else {
