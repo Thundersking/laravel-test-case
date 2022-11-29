@@ -95,7 +95,7 @@ abstract class TestCase extends BaseTestCase
 
             $response = $this->withToken()->post('/' . $this->module, $data);
 
-            if ($response->status() === 201) {
+            if ($response->status() === 200 || $response->status() === 201) {
                 $response->assertCreated();
                 $this->success($this->module . '/create - 201');
             } else {
